@@ -1,6 +1,6 @@
 import { oids } from '../../config.js';
 
-import { botOnSwitchDown } from '../BotCommand/index.js';
+import { botOnSwitchDown, botOnSwitchUp } from '../BotCommand/index.js';
 
 let definedEntity = [];
 
@@ -21,11 +21,12 @@ export default (snmp, bot) => {
     const session = snmp.createSession(currentIp, 'pub4MRTG');
 
     const oid = `1.3.6.1.2.1.2.2.1.8.${oids[currentIp].oid}`;
-    session.get(oid, (error) => {
+    session.get(oid, (error, varbinds) => {
+      console.log(varbinds)
       if (error) {
         botOnSwitchDown(bot, oids[currentIp].location);
       } else {
-        console.log('awd');
+        botOnSwitchUp(bot, oids[currentIp].location);
       }
       session.close()
     });
