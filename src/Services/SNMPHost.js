@@ -16,21 +16,21 @@ export const prepareSwitchesState = () => {
 };
 
 export default (snmp, bot) => {
-  console.log(`call`)
+  console.log(definedEntity);
   definedEntity.forEach((item) => {
     const currentIp = Object.keys(item)[0];
     const session = snmp.createSession(currentIp, 'pub4MRTG');
     const oid = `1.3.6.1.2.1.2.2.1.8.${oids[currentIp].oid}`;
-    console.log(`session init on ${oid}`)
+    console.log(`session init on ${oid}`);
     session.get(oid, (error, varbinds) => {
-      console.log(`session start on ${oid}`)
-      console.log(varbinds)
+      console.log(`session start on ${oid}`);
+      console.log(varbinds);
       if (error) {
         botOnSwitchDown(bot, oids[currentIp].location);
       } else {
         botOnSwitchUp(bot, oids[currentIp].location);
       }
-      session.close()
+      session.close();
     });
   });
 };
