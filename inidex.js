@@ -9,8 +9,8 @@ import { botStart } from './src/BotCommand/index.js';
 const bot = new Telegraf(BOT_TOKEN);
 
 botStart(bot);
-
+SNMPHost(snmp, bot);
 bot.launch().then(() => console.log('bot launched'));
 
 prepareSwitchesState();
-SNMPHost(snmp, bot);
+
