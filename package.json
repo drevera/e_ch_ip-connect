@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "net-snmp": "^3.9.0",
     "nodemon": "^2.0.21",
     "prettier": "^2.8.4",
     "telegraf": "^3.38.0"
