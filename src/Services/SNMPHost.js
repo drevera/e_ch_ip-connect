@@ -24,13 +24,13 @@ export default (snmp, bot) => {
     console.log(`session init on ${oid}`);
     session.get ([oid], (error, varbinds) => {
       if (error) {
-        botOnSwitchState(bot, `${oid[0]} ${oids[currentIp].location} connection error. Details: ${error}`);
+        botOnSwitchState(bot, `${oid} ${oids[currentIp].location} connection error. Details: ${error}`);
       } else {
         for (let i = 0; i < varbinds.length; i++) {
           if (snmp.isVarbindError (varbinds[i])) {
-            botOnSwitchState(bot, `${oid[0]} ${oids[currentIp].location} down`);
+            botOnSwitchState(bot, `${oid} ${oids[currentIp].location} down`);
           } else {
-            botOnSwitchState(bot, `${oid[0]} ${oids[currentIp].location} up`);
+            botOnSwitchState(bot, `${oid} ${oids[currentIp].location} up`);
           }
         }
       }
