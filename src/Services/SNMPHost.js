@@ -1,6 +1,6 @@
 import { oids } from '../../config.js';
 
-import { botOnSwitchDown, botOnSwitchUp } from '../BotCommand/index.js';
+import { botOnSwitchState } from '../BotCommand/index.js';
 
 let definedEntity = [];
 
@@ -22,15 +22,15 @@ export default (snmp, bot) => {
     const session = snmp.createSession(currentIp, 'pub4MRTG');
     const oid = `1.3.6.1.2.1.2.2.1.8.${oids[currentIp].oid}`;
     console.log(`session init on ${oid}`);
-    session.get ([oid], function (error, varbinds) {
+    session.get ([oid], (error, varbinds) => {
       if (error) {
-        console.error (error);
+        botOnSwitchState(bot, `${oid[0]} ${oids[currentIp].location} connection error. Details: ${error}`);
       } else {
-        for (var i = 0; i < varbinds.length; i++) {
+        for (let i = 0; i < varbinds.length; i++) {
           if (snmp.isVarbindError (varbinds[i])) {
-            console.error (snmp.varbindError (varbinds[i]));
+            botOnSwitchState(bot, `${oid[0]} ${oids[currentIp].location} down`);
           } else {
-            console.log (varbinds[i].oid + " = " + varbinds[i].value);
+            botOnSwitchState(bot, `${oid[0]} ${oids[currentIp].location} up`);
           }
         }
       }

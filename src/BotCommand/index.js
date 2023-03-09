@@ -1,5 +1,4 @@
 import botStart from './botStart.js';
-import botOnSwitchDown from './botOnSwitchDown.js';
-import botOnSwitchUp from './botOnSwitchUp.js';
+import botOnSwitchState from './botOnSwitchState.js';
 
-export { botStart, botOnSwitchDown, botOnSwitchUp };
+export { botStart, botOnSwitchState };
