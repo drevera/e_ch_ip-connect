@@ -27,6 +27,7 @@ export default (snmp, bot) => {
         botOnSwitchState(bot, `${oid} ${oids[currentIp].location} connection error. Details: ${error}`);
       } else {
         for (let i = 0; i < varbinds.length; i++) {
+          console.log(varbinds)
           if (snmp.isVarbindError (varbinds[i])) {
             botOnSwitchState(bot, `${oid} ${oids[currentIp].location} down`);
           } else {
