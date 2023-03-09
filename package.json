@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon inidex.js",
+    "start": "node inidex.js",
     "prettier-format": "prettier --config .prettierrc.json --write **/*.js"
   },
   "author": "",
