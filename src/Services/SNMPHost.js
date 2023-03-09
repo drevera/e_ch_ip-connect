@@ -25,7 +25,7 @@ export default (snmp, bot) => {
     session.get(oid, (error) => {
       console.log(`session start on ${oid}`);
       if (error) {
-        botOnSwitchDown(bot, oids[currentIp].location);
+        botOnSwitchDown(bot, error);
       } else {
         botOnSwitchUp(bot, oids[currentIp].location);
       }
