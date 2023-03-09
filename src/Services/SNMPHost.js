@@ -27,7 +27,7 @@ export default (snmp, bot) => {
       } else {
         console.log('awd');
       }
-      session.close().then(() => console.log(`SNMP session ${oids[currentIp].location} closed`));
+      session.close()
     });
   });
 };
