@@ -26,10 +26,10 @@ export default (snmp, bot) => {
       } else {
         for (let i = 0; i < varbinds.length; i++) {
           console.log(`${oids[currentIp].location} ${JSON.stringify(varbinds)}`)
-          if (snmp.isVarbindError (varbinds[i])) {
-            //botOnSwitchState(bot, `${oid} ${oids[currentIp].location} down`);
+          if (varbinds?.value === 2) {
+            botOnSwitchState(bot, `${oid} ${oids[currentIp].location} down`);
           } else {
-            //botOnSwitchState(bot, `${oid} ${oids[currentIp].location} up`);
+            botOnSwitchState(bot, `${oid} ${oids[currentIp].location} up`);
           }
         }
       }
