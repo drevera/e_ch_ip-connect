@@ -26,8 +26,8 @@ export default (snmp, bot) => {
       } else {
         for (let i = 0; i < varbinds.length; i++) {
           console.log(`${oids[currentIp].location} ${JSON.stringify(varbinds)}`)
-          console.log(varbinds)
-          if (varbinds?.value === 2) {
+          console.log(varbinds[0])
+          if (varbinds[0]?.value === 2) {
             botOnSwitchState(bot, `${oid} ${oids[currentIp].location} down`);
           } else {
             botOnSwitchState(bot, `${oid} ${oids[currentIp].location} up`);
