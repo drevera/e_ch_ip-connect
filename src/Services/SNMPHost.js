@@ -16,6 +16,7 @@ export const prepareSwitchesState = () => {
 };
 
 export default (snmp, bot) => {
+  console.log(`call`)
   definedEntity.forEach((item) => {
     const currentIp = Object.keys(item)[0];
     const session = snmp.createSession(currentIp, 'pub4MRTG');
