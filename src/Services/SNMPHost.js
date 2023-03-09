@@ -22,14 +22,21 @@ export default (snmp, bot) => {
     const session = snmp.createSession(currentIp, 'pub4MRTG');
     const oid = `1.3.6.1.2.1.2.2.1.8.${oids[currentIp].oid}`;
     console.log(`session init on ${oid}`);
-    session.get(oid, (error) => {
-      console.log(`session start on ${oid}`);
+    session.get ([oid], function (error, varbinds) {
       if (error) {
-        botOnSwitchDown(bot, error);
+        console.error (error);
       } else {
-        botOnSwitchUp(bot, oids[currentIp].location);
+        for (var i = 0; i < varbinds.length; i++) {
+          if (snmp.isVarbindError (varbinds[i])) {
+            console.error (snmp.varbindError (varbinds[i]));
+          } else {
+            console.log (varbinds[i].oid + " = " + varbinds[i].value);
+          }
+        }
       }
-      session.close();
+      session.close ();
     });
+
   });
+
 };
