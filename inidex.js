@@ -11,5 +11,5 @@ const bot = new Telegraf(BOT_TOKEN);
 botStart(bot);
 setInterval(() => {
     SNMPHost(snmp, bot);
-}, 30000)
+}, 10000)
 bot.launch().then(() => console.log('bot launched'));
