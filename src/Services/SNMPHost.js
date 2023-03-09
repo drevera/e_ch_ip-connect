@@ -19,9 +19,10 @@ export default (snmp, bot) => {
   definedEntity.forEach((item) => {
     const currentIp = Object.keys(item)[0];
     const session = snmp.createSession(currentIp, 'pub4MRTG');
-
     const oid = `1.3.6.1.2.1.2.2.1.8.${oids[currentIp].oid}`;
+    console.log(`session init on ${oid}`)
     session.get(oid, (error, varbinds) => {
+      console.log(`session start on ${oid}`)
       console.log(varbinds)
       if (error) {
         botOnSwitchDown(bot, oids[currentIp].location);
