@@ -25,8 +25,6 @@ export default (snmp, bot) => {
         botOnSwitchState(bot, `${oid} ${oids[currentIp].location} connection error. Details: ${error}`);
       } else {
         for (let i = 0; i < varbinds.length; i++) {
-          console.log(`${oids[currentIp].location} ${JSON.stringify(varbinds)}`)
-          console.log(varbinds[0])
           if (varbinds[0]?.value === 2) {
             botOnSwitchState(bot, `${oid} ${oids[currentIp].location} down`);
           } else {
