@@ -16,18 +16,16 @@ export const prepareSwitchesState = () => {
 };
 
 export default (snmp, bot) => {
-  console.log(definedEntity);
   definedEntity.forEach((item) => {
     const currentIp = Object.keys(item)[0];
     const session = snmp.createSession(currentIp, 'pub4MRTG');
     const oid = `1.3.6.1.2.1.2.2.1.8.${oids[currentIp].oid}`;
-    console.log(`session init on ${oid}`);
     session.get ([oid], (error, varbinds) => {
       if (error) {
         botOnSwitchState(bot, `${oid} ${oids[currentIp].location} connection error. Details: ${error}`);
       } else {
         for (let i = 0; i < varbinds.length; i++) {
-          console.log(`${oids[currentIp].location} ${varbinds}`)
+          console.log(`${oids[currentIp].location} ${JSON.stringify(varbinds)}`)
           if (snmp.isVarbindError (varbinds[i])) {
             //botOnSwitchState(bot, `${oid} ${oids[currentIp].location} down`);
           } else {
