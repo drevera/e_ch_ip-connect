@@ -22,9 +22,8 @@ export default (snmp, bot) => {
     const session = snmp.createSession(currentIp, 'pub4MRTG');
     const oid = `1.3.6.1.2.1.2.2.1.8.${oids[currentIp].oid}`;
     console.log(`session init on ${oid}`);
-    session.get(oid, (error, varbinds) => {
+    session.get(oid, (error) => {
       console.log(`session start on ${oid}`);
-      console.log(varbinds);
       if (error) {
         botOnSwitchDown(bot, oids[currentIp].location);
       } else {
