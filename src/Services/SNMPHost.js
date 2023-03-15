@@ -9,7 +9,7 @@ const arrayOidsKeys = Object.keys(oids);
 export const prepareSwitchesState = () => {
   arrayOidsKeys.forEach((item) => {
     const entity = {
-      [item]: 0,
+      [item]: null,
     };
     definedEntity.push(entity);
   });
@@ -22,20 +22,21 @@ export default (snmp, bot) => {
     const oid = `1.3.6.1.2.1.2.2.1.8.${oids[currentIp].oid}`;
     session.get([oid], (error, varbinds) => {
       if (error) {
-        if (item !== 0) {
-          botOnSwitchState(bot, `${oid} ${oids[currentIp].location} connection error. Details: ${error}`);
+        if (item[currentIp] !== 0) {
+          if (item[currentIp] !== null)
+            botOnSwitchState(bot, `${oid} ${oids[currentIp].location} connection error. Details: ${error}`);
           item[currentIp] = 0;
         }
       } else {
         for (let i = 0; i < varbinds.length; i++) {
           if (varbinds[0]?.value === 2) {
-            if (item !== 2) {
-              botOnSwitchState(bot, `${oid} ${oids[currentIp].location} down`);
+            if (item[currentIp] !== 2) {
+              if (item[currentIp] !== null) botOnSwitchState(bot, `${oid} ${oids[currentIp].location} down`);
               item[currentIp] = 2;
             }
           } else {
-            if (item !== 1) {
-              botOnSwitchState(bot, `${oid} ${oids[currentIp].location} up`);
+            if (item[currentIp] !== 1) {
+              if (item[currentIp] !== null) botOnSwitchState(bot, `${oid} ${oids[currentIp].location} up`);
               item[currentIp] = 1;
             }
           }
