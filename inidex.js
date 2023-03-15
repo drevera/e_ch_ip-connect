@@ -5,9 +5,9 @@ import { BOT_TOKEN } from './config.js';
 
 import { prepareSwitchesState, SNMPHost } from './src/Services/index.js';
 import { botStart } from './src/BotCommand/index.js';
-prepareSwitchesState();
 const bot = new Telegraf(BOT_TOKEN);
 
+prepareSwitchesState();
 botStart(bot);
 setInterval(() => {
   SNMPHost(snmp, bot);
