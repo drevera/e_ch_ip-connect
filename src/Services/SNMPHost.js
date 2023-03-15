@@ -17,12 +17,12 @@ export const prepareSwitchesState = () => {
 
 export default (snmp, bot) => {
   definedEntity.forEach((item) => {
-    console.log(definedEntity);
     const currentIp = Object.keys(item)[0];
     const session = snmp.createSession(currentIp, 'pub4MRTG');
     const oid = `1.3.6.1.2.1.2.2.1.8.${oids[currentIp].oid}`;
     session.get([oid], (error, varbinds) => {
       if (error) {
+        console.log(item);
         if (item !== 0) {
           botOnSwitchState(bot, `${oid} ${oids[currentIp].location} connection error. Details: ${error}`);
           item = 0;

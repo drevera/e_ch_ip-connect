@@ -11,7 +11,6 @@ export const oids = {
     oid: 123,
     location: 'fake',
   },
-
   '192.168.7.210': {
     oid: 10019,
     location: '210',
